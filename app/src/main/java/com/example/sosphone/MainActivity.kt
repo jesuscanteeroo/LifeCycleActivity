@@ -15,10 +15,15 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.sosphone.databinding.ActivityPpalBinding
 import android.Manifest
 import android.provider.Settings
+import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 
 class MainActivity : AppCompatActivity() {
+
+    private  var contador : Int = 0
+    private lateinit var estado : String
+
     private lateinit var mainBinding : ActivityPpalBinding
     private  var phoneSOS : String? = null
     //Acepta como lanzador un string que representa el permiso a solicitar.
@@ -29,32 +34,116 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        contador++
+        estado = "onCreate"
+
+        Log.d("SOSPhone", "onCreate ejecutado")
+        Log.d("SOSPhone", "Contador: $contador")
+        Log.d("SOSPhone", "Estado: $estado")
+
         mainBinding = ActivityPpalBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
 
         enableEdgeToEdge()
+
         ViewCompat.setOnApplyWindowInsetsListener(mainBinding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom
+            )
             insets
         }
+
         init()
         initEventCall()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        contador++
+        estado = "onResume"
+
+        Log.d("SOSPhone", "onResume ejecutado")
+        Log.d("SOSPhone", "Contador: $contador")
+        Log.d("SOSPhone", "Estado: $estado")
+
+        permisionPhone = isPermissionCall()
+        val stringPhone = getString(R.string.string_phone)
+        phoneSOS = intent.getStringExtra(stringPhone)
+        mainBinding.txtPhone.setText(phoneSOS)
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+
+        contador++
+        estado = "onStart"
+
+        Log.d("SOSPhone", "onStart ejecutado")
+        Log.d("SOSPhone", "Contador: $contador")
+        Log.d("SOSPhone", "Estado: $estado")
+
+        val objeto = ClaseA(identificador = 1, nombre = "Jesus", edad = 29)
+
+        Log.d("ClaseA", objeto.toString())
+
+        Toast.makeText(
+            this,
+            objeto.toString(),
+            Toast.LENGTH_LONG
+        ).show()
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+
+        contador++
+        estado = "onPause"
+
+        Log.d("SOSPhone", "onPause ejecutado")
+        Log.d("SOSPhone", "Contador: $contador")
+        Log.d("SOSPhone", "Estado: $estado")
 
     }
 
-    /*
-    Cada vez que vuelve el Activity a la cabeza de la pila,
-    debemos de volver a seleccionar el phone pasado mediante el intent
-    desde el Activity 1.
-     */
-    override fun onResume() {
-        super.onResume()
-        permisionPhone = isPermissionCall()
-        val stringPhone  = getString(R.string.string_phone)
-        phoneSOS = intent.getStringExtra(stringPhone)
-        mainBinding.txtPhone.setText(phoneSOS)
 
+    override fun onStop() {
+        super.onStop()
+
+        contador++
+        estado = "onStop"
+
+        Log.d("SOSPhone", "onStop ejecutado")
+        Log.d("SOSPhone", "Contador: $contador")
+        Log.d("SOSPhone", "Estado: $estado")
+
+    }
+
+
+    override fun onRestart() {
+        super.onRestart()
+
+        contador++
+        estado = "onRestart"
+
+        Log.d("SOSPhone", "onRestart ejecutado")
+        Log.d("SOSPhone", "Contador: $contador")
+        Log.d("SOSPhone", "Estado: $estado")
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        contador++
+        estado = "onDestroy"
+
+        Log.d("SOSPhone", "onDestroy ejecutado")
+        Log.d("SOSPhone", "Contador: $contador")
+        Log.d("SOSPhone", "Estado: $estado")
 
     }
 

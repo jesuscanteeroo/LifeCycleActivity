@@ -42,7 +42,6 @@ class ConfActivity : AppCompatActivity() {
         }
 */
         initPreferentShared()
-        start()
     }
 
     private fun initPreferentShared() {
@@ -63,8 +62,8 @@ class ConfActivity : AppCompatActivity() {
         }
     }
 
-    private fun start(){
-        //buscamos la preferencia del phone guardada. En caso de que no esté, será null
+    private fun onstart(){
+        super.onStart()
         val sharedPhone : String?  = sharedFich.getString(nameSharedPhone, null)
 
         sharedPhone?.let {

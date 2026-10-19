@@ -62,7 +62,7 @@ class ConfActivity : AppCompatActivity() {
         }
     }
 
-    private fun onstart(){
+    override fun onStart(){
         super.onStart()
         val sharedPhone : String?  = sharedFich.getString(nameSharedPhone, null)
 

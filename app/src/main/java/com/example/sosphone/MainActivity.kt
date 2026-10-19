@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun init(){
         registerLauncher()
-        if (!isPermissionCall()) //verificamos permisos en de llamada.
+        if (!isPermissionCall()) //verificamos permisos en de llamada..
             requestPermissionLauncher.launch(Manifest.permission. CALL_PHONE)
 
         mainBinding.ivChangePhone.setOnClickListener {
